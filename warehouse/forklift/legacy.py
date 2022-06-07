@@ -425,13 +425,13 @@ def _validate_dynamic(form, field):
 
     if disallowed_dynamic_fields:
         if len(disallowed_dynamic_fields) == 1:
-            raise wtforms.validators.ValidationError(
-                f"The field {disallowed_dynamic_fields[0]!r} cannot be marked as dynamic."
-            )
+            values = f"field {disallowed_dynamic_fields[0]!r}"
         else:
-            raise wtforms.validators.ValidationError(
-                f"The fields {disallowed_dynamic_fields!r} cannot be marked as dynamic."
-            )
+            values = f"fields {disallowed_dynamic_fields!r}"
+
+        raise wtforms.validators.ValidationError(
+            f"The {values} cannot be marked as dynamic.",
+        )
 
 
 def _construct_dependencies(form, types):

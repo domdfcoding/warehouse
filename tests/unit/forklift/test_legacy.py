@@ -381,7 +381,9 @@ class TestValidation:
         with pytest.raises(ValidationError):
             legacy._validate_classifiers(form, field)
 
-    @pytest.mark.parametrize("data", [(["Requires-Dist"]), (["Requires-Dist", "Requires-Python"])])
+    @pytest.mark.parametrize(
+        "data", [(["Requires-Dist"]), (["Requires-Dist", "Requires-Python"])]
+    )
     def test_validate_dynamic_valid(self, db_request, data):
         form = pretend.stub()
         field = pretend.stub(data=data)
