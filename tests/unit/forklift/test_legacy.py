@@ -381,6 +381,21 @@ class TestValidation:
         with pytest.raises(ValidationError):
             legacy._validate_classifiers(form, field)
 
+    @pytest.mark.parametrize("data", [(["Requires-Dist"]), (["Requires-Dist", "Requires-Python"])])
+    def test_validate_dynamic_valid(self, db_request, data):
+        form = pretend.stub()
+        field = pretend.stub(data=data)
+
+        legacy._validate_dynamic(form, field)
+
+    @pytest.mark.parametrize("data", [(["Version"]), (["Name"]), (["Version", "Name"])])
+    def test_validate_dynamic_invalid(self, db_request, data):
+        form = pretend.stub()
+        field = pretend.stub(data=data)
+
+        with pytest.raises(ValidationError):
+            legacy._validate_dynamic(form, field)
+
 
 def test_construct_dependencies():
     types = {"requires": DependencyKind.requires, "provides": DependencyKind.provides}

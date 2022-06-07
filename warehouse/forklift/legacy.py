@@ -420,8 +420,8 @@ def _validate_dynamic(form, field):
     disallowed_dynamic_fields = []
 
     for field_name in ("Name", "Version", "Metadata-Version"):
-		if field_name.lower() in dynamic_fields:
-			disallowed_dynamic_fields.append(field_name)
+        if field_name.lower() in dynamic_fields:
+            disallowed_dynamic_fields.append(field_name)
 
     if disallowed_dynamic_fields:
         if len(disallowed_dynamic_fields) == 1:
@@ -535,7 +535,7 @@ class MetadataForm(forms.Form):
         description="Classifier",
         validators=[_validate_no_deprecated_classifiers, _validate_classifiers],
     )
-	dynamic = ListField(
+    dynamic = ListField(
         description="Dynamic",
         validators=[_validate_dynamic],
     )
